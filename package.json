@@ -1,0 +1,23 @@
+{
+  "name": "aug",
+  "version": "0.0.1",
+  "description": "cross-platfrom IOT Platfrom for Groza",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanshengshui/AUG.git"
+  },
+  "keywords": [
+    "IOT",
+    "cross-platform"
+  ],
+  "author": "james mu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sanshengshui/AUG/issues"
+  },
+  "homepage": "https://github.com/sanshengshui/AUG#readme"
+}
