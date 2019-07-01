@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Fire Sale</title>
+ <link rel="stylesheet" href="style.css" type="text/css">
+ </head>
+ <body> 
+     <!--控件部分在顶部添加了用于打开和保存文件的按钮。稍后我们将向这些按钮添加功能。-->
+ <section class="controls"> 
+ <button id="new-file">New File</button>  
+ <button id="open-file">Open File</button>
+ <button id="save-markdown" disabled>Save File</button>
+ <button id="revert" disabled>Revert</button>
+ <button id="save-html">Save HTML</button>
+ <button id="show-file" disabled>Show File</button>
+ <button id="open-in-default" disabled>Open in Default Application</button>
+ </section>
+     <!--我们的应用程序允许使用.raw-markdown类编写和编辑文本区域中的内容，并使用.rendered-html类在div元素中呈现该内容。-->
+ <section class="content"> 
+     <!--<label>标签是可选的，并且包含了这些标签，以使视障用户更容易访问应用程序。 -->
+    <label for="markdown" hidden>Markdown Content</label> 
+    <textarea class="raw-markdown" id="markdown"></textarea>
+    <div class="rendered-html" id="html"></div>
+    </section> 
+    </body> 
+    <!--在文件末尾的标记中，我们需要渲染进程的代码，它位于同一个目录中的renderer.js中。 -->
+    <script> 
+    require('./renderer.js'); 
+    </script>
+   </html>

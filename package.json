@@ -1,26 +1,25 @@
 {
-  "name": "aug",
-  "version": "0.0.1",
-  "description": "cross-platfrom IOT Platfrom for Groza",
-  "main": "main.js",
+  "name": "firesale",
+  "version": "1.0.0",
+  "description": "Since Electron 5.x completed code from [Electron in Action](http://bit.ly/electronjs).",
+  "main": "app/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sanshengshui/AUG.git"
   },
-  "keywords": [
-    "IOT",
-    "cross-platform"
-  ],
-  "author": "james mu",
-  "license": "MIT",
+  "keywords": [],
+  "author": "james mu ",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/sanshengshui/AUG/issues"
   },
   "homepage": "https://github.com/sanshengshui/AUG#readme",
-  "devDependencies": {
-    "electron": "^5.0.3"
+  "dependencies": {
+    "electron": "^5.0.6",
+    "marked": "^0.6.3"
   }
 }
