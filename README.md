@@ -12,6 +12,12 @@ You might also like [Electron in Action](https://github.com/electron-in-action).
 
 **第1篇 Electron入门**
 
+- [x] 第一章中，我们将指出Electron能做什么和不能做什么。我们来了解一些用它所做的一些令人惊叹的程序。 基于第1章的应用程序,我将详细说明它与浏览器的不同之处 。
+
+- [x] 第二章中，我们将通过构建一个简单的Electron应用程序来让你了解到用Electron构建应用程序既轻松又有趣。
+
+  
+
 > 　　[本章简述](https://github.com/sanshengshui/AUG/wiki/1-Electron%E5%85%A5%E9%97%A8)
 
 - **第1章** [介绍Electron](https://github.com/sanshengshui/AUG/wiki/1.1-%E4%BB%8B%E7%BB%8DElectron)
