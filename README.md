@@ -4,7 +4,11 @@
 
 > Electron In Action 中译文版，学习 [Electron](https://electronjs.org)
 
-You might also like [Electron in Action](https://github.com/electron-in-action).
+你可能喜欢 [Electron in Action](https://github.com/electron-in-action).
+
+
+
+------
 
 
 
@@ -12,9 +16,9 @@ You might also like [Electron in Action](https://github.com/electron-in-action).
 
 **第1篇 Electron入门**
 
-- [x] 第一章中，我们将指出Electron能做什么和不能做什么。我们来了解一些用它所做的一些令人惊叹的程序。 基于第1章的应用程序,我将详细说明它与浏览器的不同之处 。
+- [x] 第1章主要内容: 我们将指出Electron能做什么和不能做什么。我们来了解一些用它所做的一些令人惊叹的程序。 基于第1章的应用程序,我将详细说明它与浏览器的不同之处 。
 
-- [x] 第二章中，我们将通过构建一个简单的Electron应用程序来让你了解到用Electron构建应用程序既轻松又有趣。
+- [x] 第2章主要内容: 我们将通过构建一个简单的Electron应用程序来让你了解到用Electron构建应用程序既轻松又有趣。
 
   
 
@@ -24,6 +28,8 @@ You might also like [Electron in Action](https://github.com/electron-in-action).
 - **第2章** [打造你的第一个Electron应用](https://github.com/sanshengshui/AUG/wiki/1.2-%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAElectron%E5%BA%94%E7%94%A8)
 
 
+
+------
 
 **第2篇 用Electron构建跨平台应用程序**
 
@@ -42,6 +48,8 @@ You might also like [Electron in Action](https://github.com/electron-in-action).
 - **第11章** 使用Spectron测试应用程序
 
 
+
+------
 
 **第3篇 部署Electron程序**
 
