@@ -10,54 +10,134 @@
 
 ------
 
+## 本章主要内容:
 
-
-## 目录
-
-**第1篇 Electron入门**
-
-- [x] 第1章主要内容: 我们将指出Electron能做什么和不能做什么。我们来了解一些用它所做的一些令人惊叹的程序。 基于第1章的应用程序,我将详细说明它与浏览器的不同之处 。
-
-- [x] 第2章主要内容: 我们将通过构建一个简单的Electron应用程序来让你了解到用Electron构建应用程序既轻松又有趣。
-
-  
-
-> 　　[本章简述](https://github.com/sanshengshui/AUG/wiki/1-Electron%E5%85%A5%E9%97%A8)
-
-- **第1章** [介绍Electron](https://github.com/sanshengshui/AUG/wiki/1.1-%E4%BB%8B%E7%BB%8DElectron)
-- **第2章** [打造你的第一个Electron应用](https://github.com/sanshengshui/AUG/wiki/1.2-%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAElectron%E5%BA%94%E7%94%A8)
+- 使用Electron的`dialog`模块实现一个本机打开文件对话框
+- 促进主进程和渲染进程之间的通信
+- 将功能从主进程暴露给渲染进程
+- 使用Electron的`remote`模块从主进程导入功能到渲染器进程
+- 使用webContents模块将信息从主进程发送到渲染器进程，并使用`ipcRenderer`模块为来自主进程的消息设置监听器
 
 
 
-------
+## 术语及相应方法
 
-**第2篇 用Electron构建跨平台应用程序**
+# [ipcRenderer](https://electronjs.org/docs/api/ipc-renderer#ipcrenderer)
 
-> ​	　[本章简述](https://github.com/sanshengshui/AUG/wiki/2-%E7%94%A8Electron%E6%9E%84%E5%BB%BA%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F)
+> 从渲染器进程到主进程的异步通信。
 
-- **第1章** [构建一个Markdown应用程序](https://github.com/sanshengshui/AUG/wiki/2.1-%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AC%94%E8%AE%B0%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F)
-- **第2章** 使用本机文件对话框和帮助进程间沟通
-- **第3章** 处理多窗口
-- **第4章** 处理文件
-- **第5章** 构建应用程序和上下文菜单
-- **第6章** 高级操作系统集成和动态菜单项
-- **第7章** 介绍tray模式
-- **第8章** 使用菜单栏库构建应用程序
-- **第9章** 使用transpilers和框架
-- **第10章** 持久化数据并使用原生node.js模块
-- **第11章** 使用Spectron测试应用程序
+进程: 渲染进程
+
+`ipcRenderer` 是一个 [EventEmitter](https://nodejs.org/api/events.html#events_class_eventemitter) 的实例。 你可以使用它提供的一些方法从渲染进程 (web 页面) 发送同步或异步的消息到主进程。 也可以接收主进程回复的消息。
 
 
 
-------
+`ipcRenderer` 模块使用以下方法来监听事件和发送消息。
 
-**第3篇 部署Electron程序**
+EN
 
-> ​        [本章简述](https://github.com/sanshengshui/AUG/wiki/3-%E9%83%A8%E7%BD%B2Electron%E7%A8%8B%E5%BA%8F)
+### [`ipcRenderer.on(channel, listener)`](https://electronjs.org/docs/api/ipc-renderer#ipcrendereronchannel-listener)
 
-- **第1章** 部署构建应用程序
-- **第2章** 发布和更新应用程序
-- **第3章** 通过Mac AppStore分发程序
+- `channel` String
+- `listener` Function
+
+监听 channel, 当新消息到达，将通过 listener(event, args...) 调用 listener。
 
 
+
+# remote
+
+> 在渲染进程中使用主进程模块。
+
+进程: 渲染进程
+
+`remote` 模块为渲染进程（web页面）和主进程通信（IPC）提供了一种简单方法。
+
+在Electron中, GUI 相关的模块 (如 `dialog`、`menu` 等) 仅在主进程中可用, 在渲染进程中不可用。 为了在渲染进程中使用它们, `ipc` 模块是向主进程发送进程间消息所必需的。 使用 `remote` 模块, 你可以调用 主进程对象的方法, 而不必显式发送进程间消息, 类似于 Java 的[RMI ](https://en.wikipedia.org/wiki/Java_remote_method_invocation)。
+例如：从渲染进程创建浏览器窗口
+
+```javascript
+const { BrowserWindow } = require('electron').remote
+let win = new BrowserWindow({ width: 800, height: 600 })
+win.loadURL('https://github.com')Copy
+```
+
+**注意:** 反过来（如果需要从主进程访问渲染进程），可以使用 [webContents. executeJavascript ](https://electronjs.org/docs/api/web-contents#contentsexecutejavascriptcode-usergesture-callback)。
+
+**注意事项：** 因为安全原因，remote 模块能在以下几种情况下被禁用：
+
+- [`BrowserWindow`](https://electronjs.org/docs/api/browser-window) - 通过设置 `enableRemoteModule` 选项为 `false`。
+- [`<webview>`](https://electronjs.org/docs/api/webview-tag) - 通过把 `enableremotemodule`属性设置成 `false`。
+
+
+
+#### 更多
+
+相关remote信息请参照[remote](https://electronjs.org/docs/api/remote)
+
+
+
+### webContents
+
+> 渲染以及控制web页面
+
+**进程**:  主进程
+
+`webContents` 是 [EventEmitter ](https://nodejs.org/api/events.html#events_class_eventemitter)的实例， 负责渲染和控制网页, 是 [`BrowserWindow`](https://electronjs.org/docs/api/browser-window) 对象的一个属性。 这是一个访问 `webContents` 对象的例子:
+
+```javascript
+const { BrowserWindow } = require('electron')
+
+let win = new BrowserWindow({ width: 800, height: 1500 })
+win.loadURL('http://github.com')
+
+let contents = win.webContents
+console.log(contents)
+```
+
+
+
+#### [`contents.send(channel[, arg1\][, arg2][, ...])`](https://electronjs.org/docs/api/web-contents#contentssendchannel-arg1-arg2-) 
+
+- `channel` String
+- `...args` any[]
+
+通过`channel`向渲染器进程发送异步消息，可以发送任意参数。 在内部，参数会被序列化为 JSON，因此参数对象上的函数和原型链不会被发送。
+
+渲染器进程可以处理用`ipcRenderer`模块监听的通道的消息
+
+从主进程发送消息到渲染器进程的小例子:
+
+```javascript
+// 在主进程中.
+const { app, BrowserWindow } = require('electron')
+let win = null
+
+app.on('ready', () => {
+  win = new BrowserWindow({ width: 800, height: 600 })
+  win.loadURL(`file://${__dirname}/index.html`)
+  win.webContents.on('did-finish-load', () => {
+    win.webContents.send('ping', 'whoooooooh!')
+  })
+})
+```
+
+```javascript
+<!-- index.html -->
+<html>
+<body>
+  <script>
+    require('electron').ipcRenderer.on('ping', (event, message) => {
+      console.log(message) // Prints 'whoooooooh!'
+    })
+  </script>
+</body>
+</html>
+```
+
+
+
+#### 更多
+
+相关webContents信息请参照[web-contents](https://electronjs.org/docs/api/web-contents)
 
