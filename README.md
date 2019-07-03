@@ -20,9 +20,13 @@
 
 
 
+------
+
+
+
 ## 术语及相应方法
 
-# [ipcRenderer](https://electronjs.org/docs/api/ipc-renderer#ipcrenderer)
+### ipcRenderer
 
 > 从渲染器进程到主进程的异步通信。
 
@@ -34,18 +38,17 @@
 
 `ipcRenderer` 模块使用以下方法来监听事件和发送消息。
 
-EN
-
-### [`ipcRenderer.on(channel, listener)`](https://electronjs.org/docs/api/ipc-renderer#ipcrendereronchannel-listener)
-
-- `channel` String
-- `listener` Function
-
-监听 channel, 当新消息到达，将通过 listener(event, args...) 调用 listener。
 
 
+#### 更多
 
-# remote
+相关remote信息请参照[ipcRenderer](https://electronjs.org/docs/api/ipc-renderer)
+
+------
+
+
+
+### remote
 
 > 在渲染进程中使用主进程模块。
 
@@ -75,6 +78,8 @@ win.loadURL('https://github.com')Copy
 
 相关remote信息请参照[remote](https://electronjs.org/docs/api/remote)
 
+------
+
 
 
 ### webContents
@@ -97,47 +102,36 @@ console.log(contents)
 
 
 
-#### [`contents.send(channel[, arg1\][, arg2][, ...])`](https://electronjs.org/docs/api/web-contents#contentssendchannel-arg1-arg2-) 
+#### 更多
 
-- `channel` String
-- `...args` any[]
+相关webContents信息请参照[web-contents](https://electronjs.org/docs/api/web-contents)
 
-通过`channel`向渲染器进程发送异步消息，可以发送任意参数。 在内部，参数会被序列化为 JSON，因此参数对象上的函数和原型链不会被发送。
+------
 
-渲染器进程可以处理用`ipcRenderer`模块监听的通道的消息
 
-从主进程发送消息到渲染器进程的小例子:
+
+### dialog
+
+> 显示用于打开和保存文件、警报等的本机系统对话框。
+
+线程：[主线程](https://electronjs.org/docs/glossary#main-process)
+
+显示用于选择多个文件和目录的对话框的示例:
 
 ```javascript
-// 在主进程中.
-const { app, BrowserWindow } = require('electron')
-let win = null
-
-app.on('ready', () => {
-  win = new BrowserWindow({ width: 800, height: 600 })
-  win.loadURL(`file://${__dirname}/index.html`)
-  win.webContents.on('did-finish-load', () => {
-    win.webContents.send('ping', 'whoooooooh!')
-  })
-})
+const { dialog } = require('electron')
+console.log(dialog.showOpenDialog({ properties: ['openFile', 'openDirectory', 'multiSelections'] }))Copy
 ```
 
+这个对话框是从Electron的主线程上打开的。如果要使用渲染器进程中的对话框对象, 可以使用remote来获得:
+
 ```javascript
-<!-- index.html -->
-<html>
-<body>
-  <script>
-    require('electron').ipcRenderer.on('ping', (event, message) => {
-      console.log(message) // Prints 'whoooooooh!'
-    })
-  </script>
-</body>
-</html>
+const { dialog } = require('electron').remote
+console.log(dialog)Copy
 ```
 
 
 
 #### 更多
 
-相关webContents信息请参照[web-contents](https://electronjs.org/docs/api/web-contents)
-
+相关dialog信息请参照[dialog](https://electronjs.org/docs/api/dialog)
