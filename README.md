@@ -62,7 +62,7 @@
 ```javascript
 const { BrowserWindow } = require('electron').remote
 let win = new BrowserWindow({ width: 800, height: 600 })
-win.loadURL('https://github.com')Copy
+win.loadURL('https://github.com')
 ```
 
 **注意:** 反过来（如果需要从主进程访问渲染进程），可以使用 [webContents. executeJavascript ](https://electronjs.org/docs/api/web-contents#contentsexecutejavascriptcode-usergesture-callback)。
