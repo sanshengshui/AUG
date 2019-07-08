@@ -1,35 +1,61 @@
 const{ app, BrowserWindow,dialog } = require('electron');
 const fs = require('fs');
 
-//在顶层声明mainWindow，以便在“ready”事件完成后不会将其回收为垃圾
-let mainWindow = null;
+const windows = new Set();
 
 app.on('ready', () => {
-    //使用默认属性创建一个新的BrowserWindow
-    mainWindow = new BrowserWindow({
-        show: false,
-        webPreferences: {
-            // webPreferences中的nodeIntegrationInWorker选项设置为true,Electron5.x以后,缺省为false
-            nodeIntegration: true
-        }
-    })
-
-    //在刚才创建的BrowserWindow实例中加载app/index.html
-    mainWindow.loadFile('app/index.html');
-
-    mainWindow.once('ready-to-show', () => {
-        //当DOM就绪时显示窗口。
-        mainWindow.show();
-    });
-
-    mainWindow.on('closed', () => {
-        //在窗口关闭时将进程设置为null
-        mainWindow = null;
-    });
+   createWindow();
 });
 
-const getFileFromUser  = exports.getFileFromUser   = () => {
-    const files = dialog.showOpenDialog(mainWindow, {
+app.on('window-all-closed', () => {
+  if(process.platform === 'darwin') {
+    return false;
+  }
+});
+
+app.on('activate', (event, hasVisibleWindows) => {
+    if(!hasVisibleWindows) { createWindow(); }
+});
+
+const createWindow = exports.createWindow = () => {
+    let x,y;
+
+    const currentWindow = BrowserWindow.getFocusedWindow();
+
+    if(currentWindow) {
+      const [ currentWindowX, currentWindowY ] = currentWindow.getPosition();
+      x = currentWindowX + 10;
+      y = currentWindowY +10;
+    }
+
+    let newWindow = new BrowserWindow({
+      x,
+      y, 
+      show: false,
+      webPreferences: {
+        // WebPreferences中的nodeIntegrationInWorker选项设置为true
+        nodeIntegration: true
+      }
+    });
+
+    newWindow.loadFile('app/index.html');
+
+    newWindow.once('ready-to-show', () => {
+      newWindow.show();
+    });
+
+    newWindow.on('closed', () => {
+      windows.delete(newWindow);
+      newWindow = null;
+    });
+
+    windows.add(newWindow);
+    return newWindow;
+};
+
+
+const getFileFromUser  = exports.getFileFromUser   = (targetWindow) => {
+    const files = dialog.showOpenDialog(targetWindow, {
       properties: ['openFile'],
       filters: [
         { name: 'Text Files', extensions: ['txt'] },
@@ -37,10 +63,10 @@ const getFileFromUser  = exports.getFileFromUser   = () => {
       ]
     });
   
-    if (files) { openFile(files[0]); } // A
+    if (files) { openFile(targetWindow, files[0]); } // A
   };
   
-  const openFile = (file) => {
+  const openFile = (targetWindow, file) => {
     const content = fs.readFileSync(file).toString();
-    mainWindow.webContents.send('file-opened', file, content); // B
+    targetWindow.webContents.send('file-opened', file, content); // B
   };
