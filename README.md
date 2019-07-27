@@ -36,7 +36,7 @@
 > ​	　[本章简述](https://github.com/sanshengshui/AUG/wiki/2-%E7%94%A8Electron%E6%9E%84%E5%BB%BA%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F)
 
 - **第1章** [构建一个Markdown应用程序](https://github.com/sanshengshui/AUG/wiki/2.1-%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AC%94%E8%AE%B0%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F)
-- **第2章** 使用本机文件对话框和帮助进程间沟通
+- **第2章** [使用本机文件对话框和帮助进程间沟通](https://github.com/sanshengshui/AUG/wiki/2.2-%E4%BD%BF%E7%94%A8%E6%9C%AC%E6%9C%BA%E6%96%87%E4%BB%B6%E5%AF%B9%E8%AF%9D%E6%A1%86%E5%92%8C%E5%B8%AE%E5%8A%A9%E8%BF%9B%E7%A8%8B%E9%97%B4%E6%B2%9F%E9%80%9A)
 - **第3章** 处理多窗口
 - **第4章** 处理文件
 - **第5章** 构建应用程序和上下文菜单
