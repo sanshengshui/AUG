@@ -16,9 +16,11 @@
 | [![Documentation](https://img.shields.io/badge/api-reference-blue.svg)](https://www.tensorflow.org/api_docs/) |
 
 
+:herb::herb::herb::herb::herb::herb::herb:
+## 安装
 
 
-
+:palm_tree::palm_tree::palm_tree::palm_tree::palm_tree::palm_tree::palm_tree:
 ## 清单
 
 :sparkles:**​Electron入门**
@@ -27,7 +29,6 @@
 
 :two:[打造你第一个Electron应用程序](https://github.com/sanshengshui/AUG/wiki/1.2-%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAElectron%E5%BA%94%E7%94%A8)
 
-------
 
 :boom:**用Electron构建跨平台应用程序**
 
@@ -53,7 +54,7 @@
 
 :one::one:用Spectron测试应用程序
 
-------
+
 
 :beers: **部署Electron程序**
 
@@ -65,7 +66,7 @@
 
 
 
-:four_leaf_clover::four_leaf_clover::four_leaf_clover::four_leaf_clover::four_leaf_clover::four_leaf_clover::four_leaf_clover:
+:cactus::cactus::cactus::cactus::cactus::cactus::cactus:
 
 
 ### 版权说明
