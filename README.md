@@ -1,4 +1,4 @@
-# Electron实战　:dizzy:
+# ![](doc/electron.png)　:dizzy:
 
 [<img src="https://james-1258744956.cos.ap-shanghai.myqcloud.com/ElectronInAction/chapter03/electron.svg" align="right" width="100">](https://electronjs.org)
 
