@@ -1,4 +1,4 @@
-const{ app, BrowserWindow,dialog } = require('electron');
+const { app, BrowserWindow, dialog } = require('electron');
 const fs = require('fs');
 
 const windows = new Set();
@@ -9,24 +9,24 @@ app.on('ready', () => {
 });
 
 app.on('window-all-closed', () => {
-    if(process.platform === 'darwin') {
+    if (process.platform === 'darwin') {
         return false;
     }
 });
 
 app.on('activate', (event, hasVisibleWindows) => {
-    if(!hasVisibleWindows) { createWindow(); }
+    if (!hasVisibleWindows) { createWindow(); }
 });
 
 const createWindow = exports.createWindow = () => {
-    let x,y;
+    let x, y;
 
     const currentWindow = BrowserWindow.getFocusedWindow();
 
-    if(currentWindow) {
+    if (currentWindow) {
         const [ currentWindowX, currentWindowY ] = currentWindow.getPosition();
         x = currentWindowX + 10;
-        y = currentWindowY +10;
+        y = currentWindowY + 10;
     }
 
     let newWindow = new BrowserWindow({
@@ -45,7 +45,7 @@ const createWindow = exports.createWindow = () => {
         newWindow.show();
     });
 
-    newWindow.on('closed', (event) => {
+    newWindow.on('close', (event) => {
         if (newWindow.isDocumentEdited()) {
             event.preventDefault();
 
@@ -75,8 +75,7 @@ const createWindow = exports.createWindow = () => {
     return newWindow;
 };
 
-
-const getFileFromUser  = exports.getFileFromUser   = (targetWindow) => {
+const getFileFromUser  = exports.getFileFromUser = (targetWindow) => {
     const files = dialog.showOpenDialog(targetWindow, {
         properties: ['openFile'],
         filters: [
@@ -85,7 +84,7 @@ const getFileFromUser  = exports.getFileFromUser   = (targetWindow) => {
         ]
     });
 
-    if (files) { openFile(targetWindow, files[0]); } // A
+    if (files) { openFile(targetWindow, files[0]); }
 };
 
 const openFile = exports.openFile = (targetWindow, file) => {
