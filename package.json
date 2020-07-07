@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/sanshengshui/AUG#readme",
   "dependencies": {
-    "electron": "^5.0.6",
+    "electron": "^9.1.0",
     "marked": "^0.6.3"
   }
 }
